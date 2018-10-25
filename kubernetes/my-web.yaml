@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: my-web
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: my-web
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.15-alpine
+          ports:
+            - containerPort: 80
+        - name: php
+          image: php:7.2-fpm-alpine
+          ports:
+            - containerPort: 9000
+          volumeMounts:
+            - name: src-root
+              mountPath: /var/app/src
+      volumes:
+        - name: src-root
+          hostPath:
+            path: "{{ PROJECT_DIR }}/my.web.jp"
+            type: Directory

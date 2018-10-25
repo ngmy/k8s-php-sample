@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: my-ingress
+spec:
+  rules:
+    - host: "my.web.jp"
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: service-my-web
+              servicePort: 80
+    - host: "my.api.jp"
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: service-my-api
+              servicePort: 80
